@@ -15,6 +15,8 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLockerGetTargetSignature, UTargetab
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLockerBeginFocusTargetSignature, UTargetableComponent*, NewFocusTarget);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FLockerEndFocusTargetSignature, UTargetableComponent*, OldFocusTarget);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FLockerChangeFocusTargetSignature, UTargetableComponent*, NewFocusTarget, UTargetableComponent*, OldFocusTarget);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_SixParams(FLockerDetectionBeginOverlapSignature, UPrimitiveComponent*, OverlappedComponent, AActor*, OtherActor, UPrimitiveComponent*, OtherComp, int32, OtherBodyIndex, bool, bFromSweep, const FHitResult&, SweepResult);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FLockerDetectionEndOverlapSignature, UPrimitiveComponent*, OverlappedComponent, AActor*, OtherActor, UPrimitiveComponent*, OtherComp, int32, OtherBodyIndex);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class ADVENTUR_API ULockerComponent : public UActorComponent
@@ -50,6 +52,10 @@ public :
 		FLockerEndFocusTargetSignature OnLockerEndFocusTarget;
 	UPROPERTY(BlueprintAssignable)
 		FLockerChangeAutoFocusSignature OnChangeAutoFocus;
+	UPROPERTY(BlueprintAssignable)
+		FLockerDetectionBeginOverlapSignature OnDetectionBeginOverlap;
+	UPROPERTY(BlueprintAssignable)
+		FLockerDetectionEndOverlapSignature OnDetectionEndOverlap;
 
 public:	
 	// Sets default values for this component's properties
@@ -62,7 +68,7 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void DetectionBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	UFUNCTION(BlueprintCallable)
-	void DetectionEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* Other, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	void DetectionEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	void SortTargets();
 	void FindNewTargets();

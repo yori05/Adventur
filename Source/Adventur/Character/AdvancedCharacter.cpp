@@ -61,7 +61,7 @@ AAdvancedCharacter::AAdvancedCharacter(const FObjectInitializer& ObjectInitializ
 void AAdvancedCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	AdvancedMovementComponent = Cast<UAdvancedMovementComponent>(GetCharacterMovement());
+	//AdvancedMovementComponent = Cast<UAdvancedMovementComponent>(GetCharacterMovement());
 }
 
 // Called every frame

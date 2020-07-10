@@ -134,11 +134,13 @@ void ULockerComponent::DetectionBeginOverlap(UPrimitiveComponent* OverlappedComp
 			{
 				FindNewTargets();
 			}
+
+			OnDetectionBeginOverlap.Broadcast(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
 		}
 	}
 }
 
-void ULockerComponent::DetectionEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void ULockerComponent::DetectionEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	if (OtherComp->ComponentTags.Contains(FName(TEXT("Targetable"))))
 	{
@@ -168,6 +170,8 @@ void ULockerComponent::DetectionEndOverlap(UPrimitiveComponent* OverlappedComp, 
 					OnLockerEndFocusTarget.Broadcast(OldTarget);
 				}
 			}
+
+			OnDetectionEndOverlap.Broadcast(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex);
 		}
 	}
 }

@@ -25,6 +25,7 @@ class ADVENTUR_API AAdvancedCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+private: 
 	/** Camera boom positioning the camera behind the character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
@@ -39,11 +40,11 @@ class ADVENTUR_API AAdvancedCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Target, meta = (AllowPrivateAccess = "true"))
 	class UPrimitiveComponent* DetectionComponent;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Inventory", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory", meta = (AllowPrivateAccess = "true"))
 	class UInventoryComponent* InventoryComponent;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
-	class UAdvancedMovementComponent* AdvancedMovementComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
+	mutable class UAdvancedMovementComponent* AdvancedMovementComponent;
 
 protected :
 

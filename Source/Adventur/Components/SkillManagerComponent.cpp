@@ -2,6 +2,8 @@
 
 
 #include "SkillManagerComponent.h"
+#include "Adventur/Skills/Bases/SkillBase.h"
+#include "Adventur/Character/AdvancedCharacter.h"
 
 // Sets default values for this component's properties
 USkillManagerComponent::USkillManagerComponent()
@@ -19,8 +21,12 @@ void USkillManagerComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
-	
+	OwnerCharacter = Cast<AAdvancedCharacter>(GetOwner());
+
+	for (auto it : Skills)
+	{
+		//it->Initialize(this);
+	}
 }
 
 
@@ -29,6 +35,28 @@ void USkillManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	for (auto it : Skills)
+	{
+		//it->TickSkill(DeltaTime);
+	}
 }
 
+AAdvancedCharacter* USkillManagerComponent::GetCharacterOwner() const
+{
+	return OwnerCharacter; 
+}
+
+bool USkillManagerComponent::SkillRequested(const int32 SkillIndex)
+{
+	return false;
+}
+
+bool USkillManagerComponent::IsASkillExecuting() const
+{
+	return false;
+}
+
+bool USkillManagerComponent::IsASkillAvaible(const int32 SkillIndex) const
+{
+	return false;
+}

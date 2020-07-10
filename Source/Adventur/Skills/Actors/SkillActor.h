@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "SkillActorDefault.generated.h"
+#include "SkillActor.generated.h"
 
 UCLASS()
-class ADVENTUR_API ASkillActorDefault : public AActor
+class ADVENTUR_API ASkillActor : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ASkillActorDefault();
+	ASkillActor();
 
 protected:
 	// Called when the game starts or when spawned
