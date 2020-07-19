@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Adventur/Interfaces/TeleportableInterface.h"
 #include "AdvancedCharacter.generated.h"
 
 class UTargetableComponent;
@@ -21,7 +22,7 @@ enum class ECharacterState : uint8
 };
 
 UCLASS()
-class ADVENTUR_API AAdvancedCharacter : public ACharacter
+class ADVENTUR_API AAdvancedCharacter : public ACharacter, public ITeleportableInterface
 {
 	GENERATED_BODY()
 
@@ -96,6 +97,27 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Interact();
+
+protected:
+	//bool bCanTeleport = true;
+
+public:	
+	/** Begin ITeleportable Implementation */
+	//virtual void LaunchALink_Implementation(APortal* NewPortalEnter, APortal* NewPortalExit) override;
+	//
+	//virtual bool IsLinked_Implementation(APortal* Portal) override;
+	//
+	//virtual void SwapPosition_Implementation(FVector RelativePosition, FQuat RelativeRotation) override;
+	//
+	//virtual void BreakLink_Implementation() override;
+	
+	virtual void LaunchTeleport_Implementation(AActor* ToTeleport, FVector RelativePosition) override;
+
+	virtual void ReleaseTeleport_Implementation() override;
+
+	virtual bool IsTeleportationRunning_Implementation() override;
+
+	/** End ITeleportable Implementation */
 
 public:
 	/** Returns CameraBoom subobject **/

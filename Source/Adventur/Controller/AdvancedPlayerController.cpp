@@ -21,6 +21,7 @@ AAdvancedPlayerController::AAdvancedPlayerController(const FObjectInitializer& O
 	bShouldFollowTheTarget = true;
 	bFollowTheTarget = false;
 	bShouldAutoChangeTheLockerFocus = false;
+	bCanSidesStep = false;
 }
 
 void AAdvancedPlayerController::SetupInputComponent()
@@ -160,10 +161,12 @@ void AAdvancedPlayerController::InputMotionTick(float DeltaTime)
 	//if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 1.5f, FColor::Green, FString::Printf(TEXT("SidesStep State : %i Timer : %f"), DoubleTapStateForward, DoubleTapTimerForward));
 
 	//Used to update the state of the movement axis in the 4 direction
-	if (UpdateStateAxis(DeltaTime, DoubleTapStateForward, DoubleTapTimerForward, InputForwardRight.X)
+	if (bCanSidesStep && 
+		(UpdateStateAxis(DeltaTime, DoubleTapStateForward, DoubleTapTimerForward, InputForwardRight.X)
 		|| UpdateStateAxis(DeltaTime, DoubleTapStateBackward, DoubleTapTimerBackward, InputForwardRight.X, true)
 		|| UpdateStateAxis(DeltaTime, DoubleTapStateRight, DoubleTapTimerRight, InputForwardRight.Y)
 		|| UpdateStateAxis(DeltaTime, DoubleTapStateLeft, DoubleTapTimerLeft, InputForwardRight.Y, true))
+		)
 	{
 		SidesStep();
 	}

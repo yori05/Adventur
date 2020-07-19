@@ -66,6 +66,8 @@ protected :
 		float TimeBetwenTwoTap = 0.25f;
 
 	// Locker component of the character part
+	UPROPERTY(EditAnywhere, Category = "AdvancedMovement|SidesStep")
+		uint8 bCanSidesStep : 1; //Should the camera follow the target of the locker component
 	UPROPERTY(EditAnywhere, Category = "Locker|Camera")
 		uint8 bShouldFollowTheTarget : 1; //Should the camera follow the target of the locker component
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Locker|Camera")

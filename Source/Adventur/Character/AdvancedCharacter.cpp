@@ -187,3 +187,32 @@ void AAdvancedCharacter::Interact()
 		Interactible->OnBeginInteract(this);
 	}
 }
+
+//void AAdvancedCharacter::LaunchALink_Implementation(APortal* NewPortalEnter, APortal* NewPortalExit){}
+//bool AAdvancedCharacter::IsLinked_Implementation(APortal* Portal){}
+//void AAdvancedCharacter::SwapPosition_Implementation(FVector RelativePosition, FQuat RelativeRotation){}
+//void AAdvancedCharacter::BreakLink_Implementation(){}
+
+
+void AAdvancedCharacter::LaunchTeleport_Implementation(AActor* ToTeleport, FVector RelativePosition)
+{
+	if (ToTeleport != nullptr && !bIsRunning)
+	{
+		auto Destination = ToTeleport->GetActorLocation();
+		//Destination += GetActorUpVector() * GetCapsuleComponent()->GetScaledCapsuleHalfHeight() + GetActorForwardVector() * GetCapsuleComponent()->GetScaledCapsuleRadius();
+		Destination += RelativePosition;
+		SetActorLocation(Destination, false, nullptr, ETeleportType::TeleportPhysics);
+		bIsRunning = true;
+	}
+}
+
+void AAdvancedCharacter::ReleaseTeleport_Implementation()
+{
+	bIsRunning = false;
+}
+
+bool AAdvancedCharacter::IsTeleportationRunning_Implementation()
+{
+	return bIsRunning;
+}
+
